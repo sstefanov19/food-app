@@ -1,4 +1,5 @@
 import { formatedPrice } from "../format";
+import Button from "./Button";
 
 export default function MealItem({ meal }) {
   return (
@@ -14,7 +15,7 @@ export default function MealItem({ meal }) {
             <p className="meal-item-description">{meal.description}</p>
           </div>
           <p className="meal-item-actions">
-            <button>Add to cart</button>
+            <Button>Add to Cart</Button>
           </p>
         </article>
       </li>
