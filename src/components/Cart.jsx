@@ -3,12 +3,12 @@ import Modal from "./Modal";
 import CartContext from "../store/CartContext";
 import { formatedPrice } from "../format";
 import Button from "./Button";
-import userProgressContext from "../store/UserProgressContext";
+import UserProgressContext from "../store/UserProgressContext";
 import CartItem from "./CartItem";
+
 export default function Cart() {
   const cartCtx = useContext(CartContext);
-
-  const userProgressCtx = useContext(userProgressContext);
+  const userProgressCtx = useContext(UserProgressContext);
 
   const cartTotal = cartCtx.items.reduce((totalPrice, item) => {
     return totalPrice + item.price * item.quantity;
@@ -18,13 +18,17 @@ export default function Cart() {
     userProgressCtx.hideCart();
   }
 
+  function goToCheckout() {
+    userProgressCtx.showCheckout();
+  }
+
   return (
     <Modal className="cart" open={userProgressCtx.progress === "cart"}>
       <h2>Your Cart</h2>
       <ul>
         {cartCtx.items.map((item) => (
           <CartItem
-            key={item}
+            key={item.id}
             name={item.name}
             price={item.price}
             quantity={item.quantity}
@@ -38,7 +42,7 @@ export default function Cart() {
         <Button textOnly onClick={handleCloseCart}>
           Close
         </Button>
-        <Button>Order</Button>
+        {cartCtx.items.length > 0 && <Button onClick={goToCheckout}>Order</Button>}
       </p>
     </Modal>
   );
