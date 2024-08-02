@@ -1,10 +1,13 @@
-import Header from './components/Header';
-import Menu from './components/Menu';
+import Header from "./components/Header";
+import Menu from "./components/Menu";
+import { CartContextProvider } from "./store/CartContext";
 function App() {
   return (
     <>
-      <Header/>
-      <Menu />
+      <CartContextProvider>
+        <Header />
+        <Menu />
+      </CartContextProvider>
     </>
   );
 }
